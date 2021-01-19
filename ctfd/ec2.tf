@@ -31,7 +31,6 @@ resource "aws_autoscaling_group" "ctfd-asg" {
   desired_capacity      = 2
   max_size              = 3
   min_size              = 1
-  # wait_for_elb_capacity = 2
   health_check_type     = "EC2"
   # target_group_arns     = [aws_lb_target_group.ctfd-http-alb-tg.arn, aws_lb_target_group.ctfd-https-alb-tg.arn]
   target_group_arns     = [aws_lb_target_group.ctfd-http-alb-tg.arn]

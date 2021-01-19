@@ -61,3 +61,13 @@ variable "elb-account-id" {
   description = "Default elb account id for root in us-west-2"
   default     = "797873946194"
 }
+
+variable "dbuser" {
+  description = "Default database user for rds instance"
+  default     = "ctfd"
+}
+
+variable "dbpass" {
+  description = "Default database password for rds instance"
+  default     = "hackallthethings"
+}

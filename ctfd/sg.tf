@@ -80,3 +80,27 @@ resource "aws_security_group" "ctfd-sg" {
     Name = "${var.service}-sg"
   }
 }
+
+resource "aws_security_group" "ctfd-db-sg" {
+  name        = "${var.service}-db-sg"
+  description = "Controls access to ctfd database"
+  vpc_id      = aws_vpc.ctf-interface.id
+
+  ingress {
+    security_groups = [aws_security_group.ctfd-sg.id]
+    from_port   = 3306
+    to_port     = 3306
+    protocol    = "tcp"
+  }
+
+  egress {
+    security_groups = [aws_security_group.ctfd-sg.id]
+    from_port   = 3306
+    to_port     = 3306
+    protocol    = "tcp"
+  }
+
+  tags = {
+    Name = "${var.service}-db-sg"
+  }
+}

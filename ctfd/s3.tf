@@ -7,7 +7,16 @@ resource "aws_s3_bucket" "ctfd-access" {
   force_destroy = true
 
   tags = {
-    Name = "${var.service}-s3-access-logs"
+    name = "${var.service}-s3-access-logs"
+  }
+}
+
+resource "aws_s3_bucket" "ctfd-uploads" {
+  bucket_prefix = "nlan-ctfd-uploads-"
+  force_destroy = true
+
+  tags = {
+    name = "${var.service}-s3-uploads"
   }
 }
 
