@@ -2,64 +2,64 @@
 # Build VPC #
 #############
 
-resource "aws_vpc" "minecloud" {
+resource "aws_vpc" "challenges" {
   cidr_block       = var.vpc-cidr
   instance_tenancy = "default"
   enable_dns_hostnames = "true"
 
   tags = {
-    Name = "minecloud"
+    Name = var.service
   }
 }
 
-resource "aws_internet_gateway" "minecloud-gw" {
-  vpc_id = aws_vpc.minecloud.id
+resource "aws_internet_gateway" "challenges-gw" {
+  vpc_id = aws_vpc.challenges.id
 
   tags = {
-    Name = "minecloud"
+    Name = var.service
   }
 }
 
-resource "aws_subnet" "minecloud-frontend" {
-  vpc_id     = aws_vpc.minecloud.id
-  cidr_block = var.vpc-minecloud-frontend-subnet-cidr
+resource "aws_subnet" "challenge-subnet-1" {
+  vpc_id     = aws_vpc.challenges.id
+  cidr_block = var.vpc-challenge-subnet-1-cidr
   availability_zone = "${var.region}a"
 
   tags = {
-    Name = "minecloud"
+    Name = var.service
   }
 }
 
-resource "aws_subnet" "minecloud-frontend2" {
-  vpc_id     = aws_vpc.minecloud.id
-  cidr_block = var.vpc-minecloud-frontend2-subnet-cidr
+resource "aws_subnet" "challenge-subnet-2" {
+  vpc_id     = aws_vpc.challenges.id
+  cidr_block = var.vpc-challenge-subnet-2-cidr
   availability_zone = "${var.region}b"
 
   tags = {
-    Name = "minecloud"
+    Name = var.service
   }
 }
 
 # Route tables for the subnets
 resource "aws_route_table" "public-route-table" {
-  vpc_id = aws_vpc.minecloud.id
+  vpc_id = aws_vpc.challenges.id
 
   route {
     cidr_block = "0.0.0.0/0"
-    gateway_id = aws_internet_gateway.minecloud-gw.id
+    gateway_id = aws_internet_gateway.challenges-gw.id
   }
 
   tags = {
-    Name = "minecloud"
+    Name = var.service
   }
 }
 
 resource "aws_route_table_association" "public-route-1-association" {
   route_table_id = aws_route_table.public-route-table.id
-  subnet_id      = aws_subnet.minecloud-frontend.id
+  subnet_id      = aws_subnet.challenge-subnet-1.id
 }
 
 resource "aws_route_table_association" "public-route-2-association" {
   route_table_id = aws_route_table.public-route-table.id
-  subnet_id      = aws_subnet.minecloud-frontend2.id
+  subnet_id      = aws_subnet.challenge-subnet-2.id
 }

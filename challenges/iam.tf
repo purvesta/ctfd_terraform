@@ -18,7 +18,7 @@ resource "aws_iam_role" "ecs-task-role" {
 EOF
 
   tags = {
-    Name = "minecloud"
+    Name = var.service
   }
 }
 

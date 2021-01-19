@@ -14,13 +14,24 @@ provider "aws" {
   secret_key = var.secret_key
 }
 
-module "ctfd" {
-  source         = "./ctfd"
-  region         = var.region
-  az1            = var.az1
-  az2            = var.az2
-  # Comment out to default to us-west-2
-  ctfd-ami       = var.ctfd-ami
-  awx-ami        = var.ctfd-ami
-  elb-account-id = "027434742980"
+# module "ctfd" {
+#   source         = "./ctfd"
+#   region         = var.region
+#   az1            = var.az1
+#   az2            = var.az2
+
+#   # Comment out to default to us-west-2
+#   ctfd-ami       = var.ctfd-ami
+#   awx-ami        = var.ctfd-ami
+#   elb-account-id = "027434742980"
+
+#   # Change password before running prod environment
+#   dbuser         = "ctfd"
+#   dbpass         = "hackallthethings"
+# }
+
+module "challenges" {
+  source     = "./challenges"
+  region     = var.region
+  challenges = ["cookie-monster", "sql-fun1", "js-pass"]
 }

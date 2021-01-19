@@ -1,7 +1,7 @@
-resource "aws_cloudwatch_log_group" "bedrock-fargate" {
-  name = "/ecs/bedrock-fargate"
+resource "aws_cloudwatch_log_group" "challenges" {
+  name = "/ecs/challenges"
 
   tags = {
-    Name = "minecloud"
+    Name = var.service
   }
 }

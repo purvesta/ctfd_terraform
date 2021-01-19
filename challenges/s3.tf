@@ -2,9 +2,9 @@
 # Build S3 #
 ############
 
-resource "aws_s3_bucket" "minecloud-bucket" {
-  bucket = "krs-minecloud-bucket"
-}
+# resource "aws_s3_bucket" "minecloud-bucket" {
+#   bucket = "krs-minecloud-bucket"
+# }
 
 #resource "aws_s3_bucket_policy" "minecloud-bucket-policy" {
 #  bucket = aws_s3_bucket.minecloud-bucket.id

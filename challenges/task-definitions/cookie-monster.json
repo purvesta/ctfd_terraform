@@ -1,0 +1,23 @@
+[
+  {
+    "name": "cookie_monster",
+    "image": "neverlanctf/cookie_monster:latest",
+    "essential": true,
+    "logConfiguration": {
+      "logDriver": "awslogs",
+      "secretOptions": null,
+      "options": {
+        "awslogs-group": "/ecs/challenges",
+        "awslogs-region": "us-west-2",
+        "awslogs-stream-prefix": "ecs"
+      }
+    },
+    "portMappings": [
+      {
+        "containerPort": 8000,
+        "protocol": "tcp",
+        "hostPort": 8000
+      }
+    ]
+  }
+]
